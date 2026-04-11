@@ -1,10 +1,10 @@
-const cartoonAvatars = [
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=BLACK&backgroundColor=1a1a2e&hair=short01&skinColor=brown&eyes=variant01",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=MAJED&backgroundColor=1a1a2e&hair=short02&skinColor=tanned&eyes=variant02",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=AHMED&backgroundColor=1a1a2e&hair=short03&skinColor=dark&eyes=variant03",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=ABDULAZIZ&backgroundColor=1a1a2e&hair=short04&skinColor=brown&eyes=variant04",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=AETHELRED&backgroundColor=1a1a2e&hair=short05&skinColor=tanned&eyes=variant05",
-  "https://api.dicebear.com/7.x/adventurer/svg?seed=ABDULLAH&backgroundColor=1a1a2e&hair=short06&skinColor=dark&eyes=variant06",
+const personalAvatars = [
+  "https://i.imgur.com/vNwpXep.png",     // BLACK
+  "https://i.imgur.com/VDJPt5t.gif",     // MAJED
+  "https://i.imgur.com/9BpOy3i.png",     // AHMED
+  "https://i.imgur.com/qZIE53T.png",     // ABDULAZIZ
+  "https://i.imgur.com/r9YK9nJ.gif",     // AETHELRED
+  "https://i.imgur.com/kjc71xW.png",     // ABDULLAH
 ];
 
 const roleColors: Record<string, string> = {
@@ -36,7 +36,6 @@ function MemberCard({
 }) {
   const gradient = roleColors[role] || "from-gray-400 to-gray-600";
   const badge = roleBadgeColors[role] || "bg-gray-500/20 border-gray-500/50 text-gray-400";
-
   return (
     <div
       className={`flex flex-col items-center gap-3 p-6 rounded-2xl bg-gradient-to-b from-gray-900/90 to-black/90 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300 shadow-xl hover:shadow-yellow-500/20 hover:-translate-y-1 group ${
@@ -64,12 +63,10 @@ function MemberCard({
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>
         )}
       </div>
-
       {/* Name */}
       <h4 className={`font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${gradient} ${size === "large" ? "text-xl" : "text-lg"}`}>
         {name}
       </h4>
-
       {/* Role Badge */}
       <span className={`px-3 py-1 rounded-full text-xs font-bold border tracking-wider ${badge}`}>
         {role}
@@ -82,7 +79,6 @@ export function AdminSection() {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-900/8 via-transparent to-transparent" />
-
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -97,7 +93,6 @@ export function AdminSection() {
             القيادات الإدارية التي تعمل خلف الكواليس لضمان استقرار السيرفر وتقديم الدعم للأعضاء
           </p>
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Owners Section */}
           <div className="bg-gradient-to-b from-yellow-900/10 to-black/50 backdrop-blur-sm border border-yellow-500/30 rounded-3xl p-8 shadow-2xl shadow-yellow-500/10">
@@ -107,7 +102,6 @@ export function AdminSection() {
               </h3>
               <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
             </div>
-
             {/* Triangle layout: Owner on top, Co-Owners below */}
             <div className="flex flex-col items-center gap-6">
               {/* Owner - top */}
@@ -115,7 +109,7 @@ export function AdminSection() {
                 <MemberCard
                   name="BLACK"
                   role="SERVER OWNER"
-                  avatarUrl={cartoonAvatars[0]}
+                  avatarUrl={personalAvatars[0]}
                   size="large"
                 />
               </div>
@@ -125,14 +119,14 @@ export function AdminSection() {
                   <MemberCard
                     name="MAJED"
                     role="SERVER CO OWNER"
-                    avatarUrl={cartoonAvatars[1]}
+                    avatarUrl={personalAvatars[1]}
                   />
                 </div>
                 <div className="flex-1 max-w-[180px]">
                   <MemberCard
                     name="AHMED"
                     role="SERVER CO OWNER"
-                    avatarUrl={cartoonAvatars[2]}
+                    avatarUrl={personalAvatars[2]}
                   />
                 </div>
               </div>
@@ -147,7 +141,6 @@ export function AdminSection() {
               </h3>
               <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
             </div>
-
             {/* Triangle layout: Senior on top, Manager & Diplomatic below */}
             <div className="flex flex-col items-center gap-6">
               {/* Senior - top */}
@@ -155,7 +148,7 @@ export function AdminSection() {
                 <MemberCard
                   name="ABDULAZIZ"
                   role="SENIOR"
-                  avatarUrl={cartoonAvatars[3]}
+                  avatarUrl={personalAvatars[3]}
                   size="large"
                 />
               </div>
@@ -165,14 +158,14 @@ export function AdminSection() {
                   <MemberCard
                     name="AETHELRED"
                     role="MANAGER"
-                    avatarUrl={cartoonAvatars[4]}
+                    avatarUrl={personalAvatars[4]}
                   />
                 </div>
                 <div className="flex-1 max-w-[180px]">
                   <MemberCard
                     name="ABDULLAH"
                     role="DIPLOMATIC"
-                    avatarUrl={cartoonAvatars[5]}
+                    avatarUrl={personalAvatars[5]}
                   />
                 </div>
               </div>
