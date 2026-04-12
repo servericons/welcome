@@ -60,7 +60,7 @@ function MemberCard({
         </div>
         {/* Crown for owner */}
         {role === "SERVER OWNER" && (
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl"></div>
         )}
       </div>
       {/* Name */}
