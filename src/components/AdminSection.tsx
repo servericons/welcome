@@ -1,26 +1,26 @@
 const personalAvatars = [
-  "https://i.imgur.com/vNwpXep.png",     // BLACK
-  "https://i.imgur.com/VDJPt5t.gif",     // MAJED
-  "https://i.imgur.com/9BpOy3i.png",     // AHMED
-  "https://i.imgur.com/qZIE53T.png",     // ABDULAZIZ
-  "https://i.imgur.com/r9YK9nJ.gif",     // AETHELRED
-  "https://i.imgur.com/kjc71xW.png",     // ABDULLAH
+  "https://i.imgur.com/vNwpXep.png", // BLACK
+  "https://i.imgur.com/VDJPt5t.gif", // MAJED
+  "https://i.imgur.com/9BpOy3i.png", // AHMED
+  "https://i.imgur.com/qZIE53T.png", // ABDULAZIZ
+  "https://i.imgur.com/r9YK9nJ.gif", // AETHELRED
+  "https://i.imgur.com/kjc71xW.png", // ABDULLAH
 ];
 
 const roleColors: Record<string, string> = {
   "SERVER OWNER": "from-yellow-400 to-yellow-600",
   "SERVER CO OWNER": "from-yellow-300 to-yellow-500",
-  "SENIOR": "from-purple-400 to-purple-600",
-  "MANAGER": "from-blue-400 to-blue-600",
-  "DIPLOMATIC": "from-green-400 to-green-600",
+  "SENIOR": "from-yellow-400 to-yellow-600",
+  "MANAGER": "from-yellow-400 to-yellow-600",
+  "DIPLOMATIC": "from-yellow-400 to-yellow-600",
 };
 
 const roleBadgeColors: Record<string, string> = {
   "SERVER OWNER": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
   "SERVER CO OWNER": "bg-yellow-400/15 border-yellow-400/40 text-yellow-300",
-  "SENIOR": "bg-purple-500/20 border-purple-500/50 text-purple-400",
-  "MANAGER": "bg-blue-500/20 border-blue-500/50 text-blue-400",
-  "DIPLOMATIC": "bg-green-500/20 border-green-500/50 text-green-400",
+  "SENIOR": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
+  "MANAGER": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
+  "DIPLOMATIC": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
 };
 
 function MemberCard({
@@ -45,7 +45,7 @@ function MemberCard({
       {/* Avatar */}
       <div className={`relative ${size === "large" ? "w-28 h-28" : "w-24 h-24"}`}>
         <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${gradient} opacity-30 blur-md group-hover:opacity-50 transition-opacity`} />
-        <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 ring-2 ring-offset-2 ring-offset-black ${gradient.includes("yellow") ? "ring-yellow-500" : gradient.includes("purple") ? "ring-purple-500" : gradient.includes("blue") ? "ring-blue-500" : "ring-green-500"}`}
+        <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 ring-2 ring-offset-2 ring-offset-black ${gradient.includes("yellow") ? "ring-yellow-500" : "ring-yellow-500"}`}
         >
           <img
             src={avatarUrl}
@@ -132,14 +132,13 @@ export function AdminSection() {
               </div>
             </div>
           </div>
-
-          {/* Admins Section */}
-          <div className="bg-gradient-to-b from-purple-900/10 to-black/50 backdrop-blur-sm border border-purple-500/30 rounded-3xl p-8 shadow-2xl shadow-purple-500/10">
+          {/* Admins Section - تم تعديل الألوان لتكون نفس ألوان الـ Owners (اللون الأصفر الذهبي) */}
+          <div className="bg-gradient-to-b from-yellow-900/10 to-black/50 backdrop-blur-sm border border-yellow-500/30 rounded-3xl p-8 shadow-2xl shadow-yellow-500/10">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-500 tracking-widest mb-2">
+              <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 tracking-widest mb-2">
                 🛡️ THE ADMINS
               </h3>
-              <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+              <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
             </div>
             {/* Triangle layout: Senior on top, Manager & Diplomatic below */}
             <div className="flex flex-col items-center gap-6">
