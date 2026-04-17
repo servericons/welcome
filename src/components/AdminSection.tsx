@@ -17,7 +17,7 @@ const roleBadgeColors: Record<string, string> = {
   "DIPLOMATIC": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
 };
 
-// === CONFIGURATION - حط الـ IDs هنا (نفس اللي في البوت) ===
+// === CONFIGURATION - الـ IDs الصحيحة اللي اشتغلت في الـ API ===
 interface TeamMemberConfig {
   id: string;
   role: string;
@@ -25,18 +25,18 @@ interface TeamMemberConfig {
 }
 
 const ownersConfig: TeamMemberConfig[] = [
-  { id: "111712071358681128", role: "SERVER OWNER", size: "large" },
-  { id: "738379711833376799", role: "SERVER CO OWNER" },
-  { id: "86318912707995338", role: "SERVER CO OWNER" },
+  { id: "1117120711358681128", role: "SERVER OWNER", size: "large" },
+  { id: "738379711033376799",  role: "SERVER CO OWNER" },
+  { id: "863189127079395338",  role: "SERVER CO OWNER" },
 ];
 
 const adminsConfig: TeamMemberConfig[] = [
-  { id: "1132395768567193663", role: "SENIOR", size: "large" },
-  { id: "914829146708934698", role: "MANAGER" },
-  { id: "108232600731284170", role: "DIPLOMATIC" },
+  { id: "1132395760567193663", role: "SENIOR", size: "large" },
+  { id: "914829146708934698",  role: "MANAGER" },
+  { id: "1002326007312814170", role: "DIPLOMATIC" },
 ];
 
-// === MemberCard (نفس الكود مع مؤشر الحالة) ===
+// === MemberCard (نفس التصميم مع مؤشر الحالة) ===
 function MemberCard({
   name,
   role,
@@ -53,7 +53,7 @@ function MemberCard({
   const gradient = roleColors[role] || "from-gray-400 to-gray-600";
   const badge = roleBadgeColors[role] || "bg-gray-500/20 border-gray-500/50 text-gray-400";
 
-  const statusColor = 
+  const statusColor =
     status === "online" ? "bg-green-500" :
     status === "idle" ? "bg-yellow-500" :
     status === "dnd" ? "bg-red-500" : "bg-gray-500";
@@ -65,7 +65,6 @@ function MemberCard({
         <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 ring-2 ring-offset-2 ring-offset-black ring-yellow-500`}>
           <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
         </div>
-        {/* Status Indicator */}
         <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-black rounded-full border-2 border-gray-900 flex items-center justify-center z-10">
           <div className={`w-5 h-5 rounded-full ${statusColor}`} />
         </div>
@@ -86,11 +85,12 @@ export function AdminSection() {
   const [adminsData, setAdminsData] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(true);
 
-  // غيّر الرابط هنا للـ API الخاص بك بعد ما تشغّل البوت
-  const API_URL = 'http://localhost:3001/api/staff';   // ← غيّره لاحقًا إذا نشرته
+  // ← هنا التصليح المهم
+  const API_URL = `${import.meta.env.VITE_API_URL}/api/staff`;
 
   useEffect(() => {
-    fetch(API_URL)
+    // cache busting عشان يجيب البيانات الجديدة دايماً
+    fetch(API_URL + "?t=" + Date.now())
       .then(res => res.json())
       .then(data => {
         setOwnersData(data.ownersData || {});
@@ -117,7 +117,6 @@ export function AdminSection() {
 
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden">
-      {/* باقي الـ section header والـ layout نفس الكود القديم 100% */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-900/8 via-transparent to-transparent" />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
@@ -134,7 +133,7 @@ export function AdminSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Owners Section - نفس الـ layout */}
+          {/* Owners Section */}
           <div className="bg-gradient-to-b from-yellow-900/10 to-black/50 backdrop-blur-sm border border-yellow-500/30 rounded-3xl p-8 shadow-2xl shadow-yellow-500/10">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 tracking-widest mb-2">⚜️ THE OWNERS</h3>
@@ -151,7 +150,7 @@ export function AdminSection() {
             </div>
           </div>
 
-          {/* Admins Section - نفس الـ layout */}
+          {/* Admins Section */}
           <div className="bg-gradient-to-b from-yellow-900/10 to-black/50 backdrop-blur-sm border border-yellow-500/30 rounded-3xl p-8 shadow-2xl shadow-yellow-500/10">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 tracking-widest mb-2">🛡️ THE ADMINS</h3>
