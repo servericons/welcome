@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// === Role Colors & Badge (نفسها بدون تغيير) ===
 const roleColors: Record<string, string> = {
   "SERVER OWNER": "from-yellow-400 to-yellow-600",
   "SERVER CO OWNER": "from-yellow-300 to-yellow-500",
@@ -17,7 +16,6 @@ const roleBadgeColors: Record<string, string> = {
   "DIPLOMATIC": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
 };
 
-// === CONFIGURATION - الـ IDs الصحيحة اللي اشتغلت في الـ API ===
 interface TeamMemberConfig {
   id: string;
   role: string;
@@ -36,7 +34,6 @@ const adminsConfig: TeamMemberConfig[] = [
   { id: "1002326007312814170", role: "DIPLOMATIC" },
 ];
 
-// === MemberCard (نفس التصميم مع مؤشر الحالة) ===
 function MemberCard({
   name,
   role,
@@ -62,7 +59,7 @@ function MemberCard({
     <div className={`flex flex-col items-center gap-3 p-6 rounded-2xl bg-gradient-to-b from-gray-900/90 to-black/90 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300 shadow-xl hover:shadow-yellow-500/20 hover:-translate-y-1 group ${size === "large" ? "scale-110" : ""}`}>
       <div className={`relative ${size === "large" ? "w-28 h-28" : "w-24 h-24"}`}>
         <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${gradient} opacity-30 blur-md group-hover:opacity-50 transition-opacity`} />
-        <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 ring-2 ring-offset-2 ring-offset-black ring-yellow-500`}>
+        <div className="relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 ring-2 ring-offset-2 ring-offset-black ring-yellow-500">
           <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
         </div>
         <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-black rounded-full border-2 border-gray-900 flex items-center justify-center z-10">
@@ -85,11 +82,9 @@ export function AdminSection() {
   const [adminsData, setAdminsData] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(true);
 
-  // ← هنا التصليح المهم
   const API_URL = `${import.meta.env.VITE_API_URL}/api/staff`;
 
   useEffect(() => {
-    // cache busting عشان يجيب البيانات الجديدة دايماً
     fetch(API_URL + "?t=" + Date.now())
       .then(res => res.json())
       .then(data => {
@@ -133,7 +128,6 @@ export function AdminSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Owners Section */}
           <div className="bg-gradient-to-b from-yellow-900/10 to-black/50 backdrop-blur-sm border border-yellow-500/30 rounded-3xl p-8 shadow-2xl shadow-yellow-500/10">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 tracking-widest mb-2">⚜️ THE OWNERS</h3>
@@ -150,7 +144,6 @@ export function AdminSection() {
             </div>
           </div>
 
-          {/* Admins Section */}
           <div className="bg-gradient-to-b from-yellow-900/10 to-black/50 backdrop-blur-sm border border-yellow-500/30 rounded-3xl p-8 shadow-2xl shadow-yellow-500/10">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 tracking-widest mb-2">🛡️ THE ADMINS</h3>
