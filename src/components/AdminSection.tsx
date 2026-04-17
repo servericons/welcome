@@ -50,10 +50,7 @@ function MemberCard({
   const gradient = roleColors[role] || "from-gray-400 to-gray-600";
   const badge = roleBadgeColors[role] || "bg-gray-500/20 border-gray-500/50 text-gray-400";
 
-  const statusColor =
-    status === "online" ? "bg-green-500" :
-    status === "idle" ? "bg-yellow-500" :
-    status === "dnd" ? "bg-red-500" : "bg-gray-500";
+  const statusColor = status === "online" ? "bg-green-500" : status === "idle" ? "bg-yellow-500" : status === "dnd" ? "bg-red-500" : "bg-gray-500";
 
   return (
     <div className={`flex flex-col items-center gap-3 p-6 rounded-2xl bg-gradient-to-b from-gray-900/90 to-black/90 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300 shadow-xl hover:shadow-yellow-500/20 hover:-translate-y-1 group ${size === "large" ? "scale-110" : ""}`}>
