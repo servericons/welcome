@@ -60,7 +60,7 @@ export function AdminSection() {
   const [adminsData, setAdminsData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const API_URL = "http://2.56.165.171:3001/api/staff";
+  const API_URL = "https://api.icons-gg.com:3001/api/staff";
 
   useEffect(() => {
     fetch(API_URL + "?t=" + Date.now())
