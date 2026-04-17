@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const roleColors: Record<string, string> = {
+const roleColors = {
   "SERVER OWNER": "from-yellow-400 to-yellow-600",
   "SERVER CO OWNER": "from-yellow-300 to-yellow-500",
   "SENIOR": "from-yellow-400 to-yellow-600",
@@ -8,7 +8,7 @@ const roleColors: Record<string, string> = {
   "DIPLOMATIC": "from-yellow-400 to-yellow-600",
 };
 
-const roleBadgeColors: Record<string, string> = {
+const roleBadgeColors = {
   "SERVER OWNER": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
   "SERVER CO OWNER": "bg-yellow-400/15 border-yellow-400/40 text-yellow-300",
   "SENIOR": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
@@ -16,44 +16,22 @@ const roleBadgeColors: Record<string, string> = {
   "DIPLOMATIC": "bg-yellow-500/20 border-yellow-500/50 text-yellow-400",
 };
 
-interface TeamMemberConfig {
-  id: string;
-  role: string;
-  size?: "large" | "normal";
-}
-
-const ownersConfig: TeamMemberConfig[] = [
+const ownersConfig = [
   { id: "1117120711358681128", role: "SERVER OWNER", size: "large" },
-  { id: "738379711033376799",  role: "SERVER CO OWNER" },
-  { id: "863189127079395338",  role: "SERVER CO OWNER" },
+  { id: "738379711033376799", role: "SERVER CO OWNER" },
+  { id: "863189127079395338", role: "SERVER CO OWNER" },
 ];
 
-const adminsConfig: TeamMemberConfig[] = [
+const adminsConfig = [
   { id: "1132395760567193663", role: "SENIOR", size: "large" },
-  { id: "914829146708934698",  role: "MANAGER" },
+  { id: "914829146708934698", role: "MANAGER" },
   { id: "1002326007312814170", role: "DIPLOMATIC" },
 ];
 
-function MemberCard({
-  name,
-  role,
-  avatarUrl,
-  status = "offline",
-  size = "normal",
-}: {
-  name: string;
-  role: string;
-  avatarUrl: string;
-  status?: "online" | "idle" | "dnd" | "offline";
-  size?: "large" | "normal";
-}) {
+function MemberCard({ name, role, avatarUrl, status = "offline", size = "normal" }) {
   const gradient = roleColors[role] || "from-gray-400 to-gray-600";
   const badge = roleBadgeColors[role] || "bg-gray-500/20 border-gray-500/50 text-gray-400";
-
-  const statusColor = 
-    status === "online" ? "bg-green-500" :
-    status === "idle" ? "bg-yellow-500" :
-    status === "dnd" ? "bg-red-500" : "bg-gray-500";
+  const statusColor = status === "online" ? "bg-green-500" : status === "idle" ? "bg-yellow-500" : status === "dnd" ? "bg-red-500" : "bg-gray-500";
 
   return (
     <div className={`flex flex-col items-center gap-3 p-6 rounded-2xl bg-gradient-to-b from-gray-900/90 to-black/90 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300 shadow-xl hover:shadow-yellow-500/20 hover:-translate-y-1 group ${size === "large" ? "scale-110" : ""}`}>
@@ -78,11 +56,12 @@ function MemberCard({
 }
 
 export function AdminSection() {
-  const [ownersData, setOwnersData] = useState<Record<string, any>>({});
-  const [adminsData, setAdminsData] = useState<Record<string, any>>({});
+  const [ownersData, setOwnersData] = useState({});
+  const [adminsData, setAdminsData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const API_URL = `${import.meta.env.VITE_API_URL}/api/staff`;
+  // URL مباشرة (بدون env variable)
+  const API_URL = "http://2.56.165.171:3001/api/staff";
 
   useEffect(() => {
     fetch(API_URL + "?t=" + Date.now())
@@ -95,7 +74,7 @@ export function AdminSection() {
       .catch(() => setLoading(false));
   }, []);
 
-  const getMemberProps = (config: TeamMemberConfig, dataMap: Record<string, any>) => {
+  const getMemberProps = (config, dataMap) => {
     const data = dataMap[config.id] || {};
     return {
       name: data.name || "Loading...",
@@ -106,9 +85,7 @@ export function AdminSection() {
     };
   };
 
-  if (loading) {
-    return <section className="py-24 text-center"><p className="text-yellow-400 text-xl">جاري تحميل بيانات الإدارة...</p></section>;
-  }
+  if (loading) return <section className="py-24 text-center"><p className="text-yellow-400 text-xl">جاري تحميل بيانات الإدارة...</p></section>;
 
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden">
@@ -134,9 +111,7 @@ export function AdminSection() {
               <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
             </div>
             <div className="flex flex-col items-center gap-6">
-              <div className="w-full max-w-[200px]">
-                <MemberCard {...getMemberProps(ownersConfig[0], ownersData)} />
-              </div>
+              <div className="w-full max-w-[200px]"><MemberCard {...getMemberProps(ownersConfig[0], ownersData)} /></div>
               <div className="flex gap-4 w-full justify-center">
                 <div className="flex-1 max-w-[180px]"><MemberCard {...getMemberProps(ownersConfig[1], ownersData)} /></div>
                 <div className="flex-1 max-w-[180px]"><MemberCard {...getMemberProps(ownersConfig[2], ownersData)} /></div>
@@ -150,9 +125,7 @@ export function AdminSection() {
               <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
             </div>
             <div className="flex flex-col items-center gap-6">
-              <div className="w-full max-w-[200px]">
-                <MemberCard {...getMemberProps(adminsConfig[0], adminsData)} />
-              </div>
+              <div className="w-full max-w-[200px]"><MemberCard {...getMemberProps(adminsConfig[0], adminsData)} /></div>
               <div className="flex gap-4 w-full justify-center">
                 <div className="flex-1 max-w-[180px]"><MemberCard {...getMemberProps(adminsConfig[1], adminsData)} /></div>
                 <div className="flex-1 max-w-[180px]"><MemberCard {...getMemberProps(adminsConfig[2], adminsData)} /></div>
