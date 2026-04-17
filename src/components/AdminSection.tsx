@@ -60,7 +60,6 @@ export function AdminSection() {
   const [adminsData, setAdminsData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // URL مباشرة (بدون env variable)
   const API_URL = "http://2.56.165.171:3001/api/staff";
 
   useEffect(() => {
